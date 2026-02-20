@@ -1,6 +1,7 @@
 import time
 from collections.abc import Callable
 from typing import Dict
+
 import requests
 
 from commee.messengers.base import AbstractMessenger
@@ -11,7 +12,6 @@ API = "https://api.telegram.org/bot{token}/{method}"
 class TelegramMessenger(AbstractMessenger):
     def __init__(self, token: str) -> None:
         self._token = token
-        self._url = API.format()
 
     def _api_url(self, method: str):
         return API.format(token=self._token, method=method)
@@ -27,13 +27,13 @@ class TelegramMessenger(AbstractMessenger):
 
     def run(self, on_message: Callable[[str, str], None]) -> None:
         offset = 0
-        while True:
-            messages = self._call("getUpdates", offset=offset)
-            for update in messages:
-                offset = update["update_id"] + 1
-                msg = update.get("message", {})
-                text = msg.get("text")
-                chat_id = str(msg.get("chat", {}).get("id", ""))
-                if text and chat_id:
-                    on_message(chat_id, text)
-            time.sleep(2)
+        messages = self.receive_message(offset)
+        messages_full = self._call("getUpdates", offset=offset)
+        for update in messages:
+            offset = update["update_id"] + 1
+            msg = update.get("message", {})
+            text = msg.get("text")
+            chat_id = str(msg.get("chat", {}).get("id", ""))
+            if text and chat_id:
+                on_message(chat_id, text)
+        time.sleep(2)
