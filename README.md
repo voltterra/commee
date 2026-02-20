@@ -9,6 +9,13 @@ Safe to assume 99% of it written by one of the coding "agents". Most probably no
 
 I'll see where it lands eventually.
 
+## Disclaimer
+
+    • Use subscription-based access (Claude Code / other CLIs) for rapid prototyping only.
+    • For scale or autonomous runs, switch to proper API keys with controls (limits/monitoring).
+    • Subscription use may trigger rate limits, bans, or service termination under provider policies.
+    • Use at your own risk.
+
 # License
 
 I don't know much abaout Licenses and not sure if someone going to use this package at all.
