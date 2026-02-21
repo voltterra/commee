@@ -31,3 +31,6 @@ docker-compose.override.yml
 
 # Bots
 .claude/
+
+# SQlite db
+*.db
