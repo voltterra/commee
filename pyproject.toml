@@ -9,12 +9,14 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "click>=8.3.1",
+    "fastapi>=0.129.0",
     "python-dotenv>=1.2.1",
     "requests>=2.32.5",
+    "uvicorn>=0.41.0",
 ]
 
 [project.scripts]
-commee = "commee:main"
+commee = "commee.test_cli:cli"
 
 [build-system]
 requires = ["uv_build>=0.9.14,<0.10.0"]
