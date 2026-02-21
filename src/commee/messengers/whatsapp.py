@@ -6,13 +6,11 @@ from fastapi import FastAPI, Request
 
 
 class WhatsAppMessenger:
-    def __init__(self, token: str, phone_number_id: str, port: int = 5001) -> None:
-        self._token = token
+    def __init__(self, phone_number_id: str) -> None:
         self._phone_number_id = phone_number_id
-        self._port = port
 
     def send_message(self, chat_id: str, text: str) -> None:
-        url = API.format(phone_number_id=self._phone_number_id)
+        url = self.endpoint.format(phone_number_id=self._phone_number_id)
         headers = {
             "Authorization": f"Bearer {self._token}",
             "Content-Type": "application/json",
